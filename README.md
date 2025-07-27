@@ -1,6 +1,7 @@
 # Background Music Extractor
 
-This repository contains a simple Flask web application that extracts background music from a song. It uses `pydub` to perform a basic vocal removal by subtracting stereo channels.
+This repository contains a simple web application that extracts background music from an uploaded song.
+It uses `pydub` to approximate vocal removal by subtracting stereo channels.
 
 ## Requirements
 - Python 3.12+
@@ -16,4 +17,14 @@ pip install flask pydub librosa soundfile
 ```bash
 python server.py
 ```
-Then open `http://localhost:5000` in your browser and upload a song. The app will return a `background.wav` file containing the approximated instrumental.
+Then open `http://localhost:5000` in your browser and upload a song. The app
+will return a `background.wav` file containing the approximated instrumental.
+
+## Deploying to Vercel
+Vercel will automatically detect the Python function in `api/process.py`. The
+static `index.html` at the repository root loads the app and sends requests to
+`/api/process`.
+
+1. Install the Vercel CLI and run `vercel` to deploy.
+2. Ensure `ffmpeg` is available in your deployment environment (Vercel build
+   step) for audio conversion.

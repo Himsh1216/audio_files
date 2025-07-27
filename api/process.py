@@ -5,11 +5,7 @@ from background import isolate_background
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def index():
-    return send_file('index.html')
-
-@app.route('/process', methods=['POST'])
+@app.route('/', methods=['POST'])
 def process():
     if 'file' not in request.files:
         return 'No file uploaded', 400
@@ -23,5 +19,5 @@ def process():
         isolate_background(src_path, dst_path)
         return send_file(dst_path, as_attachment=True, download_name='background.wav')
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+def handler(environ, start_response):
+    return app(environ, start_response)
