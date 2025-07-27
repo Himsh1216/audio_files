@@ -10,6 +10,7 @@ def index():
     return send_file('index.html')
 
 @app.route('/api/process', methods=['POST'])
+
 def process():
     if 'file' not in request.files:
         return 'No file uploaded', 400

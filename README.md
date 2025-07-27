@@ -7,11 +7,13 @@ It uses `pydub` to approximate vocal removal by subtracting stereo channels.
 - Python 3.12+
  - `flask`
  - `pydub`
+
 - `ffmpeg` in your PATH for audio conversion
 
 Install dependencies:
 ```bash
 pip install flask pydub
+
 ```
 
 ## Running the app
@@ -30,3 +32,4 @@ static `index.html` at the repository root loads the app and sends requests to
 1. Install the Vercel CLI and run `vercel` to deploy.
 2. Ensure `ffmpeg` is available in your deployment environment (Vercel build
    step) for audio conversion.
+

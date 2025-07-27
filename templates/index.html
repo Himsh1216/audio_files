@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Background Music Extractor</title>
+</head>
+<body>
+    <h1>Background Music Extractor</h1>
+    <form id="uploadForm">
+        <input type="file" name="file" accept="audio/*" required />
+        <button type="submit">Upload</button>
+    </form>
+    <div id="result" style="margin-top:20px;"></div>
+<script>
+document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const response = await fetch('/process', { method: 'POST', body: formData });
+    if (response.ok) {
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'background.wav';
+        link.textContent = 'Download Background Music';
+        const result = document.getElementById('result');
+        result.innerHTML = '';
+        result.appendChild(link);
+    } else {
+        alert('Error processing file');
+    }
+});
+</script>
+</body>
+</html>
